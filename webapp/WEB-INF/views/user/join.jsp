@@ -16,16 +16,12 @@
 		<c:import url="/WEB-INF/views/include/header.jsp" />
 		<div id="content">
 			<div id="user">
-				<form:form
-					modelAttribute="user"
-					id="join-form"
-					name="joinForm"
-					method="post"
+				<form:form modelAttribute="user" id="join-form" name="joinForm" method="post"
 					action="${pageContext.servletContext.contextPath }/user/join">
 					
-					<label class="block-label" for="name"><spring:message code="name" text="이름"/></label>
+					<label class="block-label" for="name">
+					<spring:message code="name" text="이름"/></label>
 					<input id="name" name="name" type="text" value="${user.name }">
-
 
 					<label class="block-label" for="email">이메일</label>
 					<form:input path="email"/>

@@ -1,0 +1,82 @@
+use jpadb;
+
+insert into user values(null, '11@naver.com', 'male','11' , '11','USER');
+insert into user values(null, '22@naver.com', 'male','22' , '22','USER');
+insert into user values(null, 'manager', 'male', 'manager', 'manager', 'ADMIN');
+
+insert into album_category values(null, '발라드');
+insert into album_category values(null, '댄스');
+insert into album_category values(null, '락');
+insert into album_category values(null, '힙합');
+
+insert into book_category values(null, '소설');
+insert into book_category values(null, '시');
+insert into book_category values(null, '자기계발서');
+
+insert into dvd_category values(null, '영화-드라마');
+insert into dvd_category values(null, '영화-액션');
+insert into dvd_category values(null, '영화-판타지');
+-- A: 앨범 6개
+insert into item values('A',null,'N','Fly On The Wall','18000');
+insert into album values('AC/DC',1,3);
+
+insert into item values('A',null,'N','LOVE YOURSELF 轉 ‘Tear’','21000');
+insert into album values('방탄소년단 (BTS)',2,2);
+
+insert into item values('A',null,'N','I am A Dreamer ','19000');
+insert into album values('박효신',3,1);
+
+insert into item values('A',null,'N','리메이크 앨범 : 꽃갈피 둘','15000');
+insert into album values('아이유 (IU)',4,1);
+
+insert into item values('A',null,'N','바람 [일반반]','20000');
+insert into album values('헤이즈 (Heize)',5,4);
+
+insert into item values('A',null,'N','Alexandrite(EP)','14000');
+insert into album values('해쉬스완 (Hash Swan)',6,4);
+
+
+-- B: DVD 6개
+insert into item values('B',null,'N','어벤져스 1,2 합본팩','30600');
+insert into DVD values('월트디즈니',7,2);
+
+insert into item values('B',null,'N','저스티스 리그 SE','22000');
+insert into DVD values('위너브라더스',8,2);
+
+insert into item values('B',null,'N',' 해리포터와 불사조 기사단','15000');
+insert into DVD values('위너브라더스',9,3);
+
+insert into item values('B',null,'N','월터의 상상은 현실이 된다','23500');
+insert into DVD values('20세기 폭스',10,3);
+
+insert into item values('B',null,'N','위대한 쇼맨','25000');
+insert into DVD values('20세기 폭스',11,1);
+
+insert into item values('B',null,'N','라라랜드','20000');
+insert into DVD values('에프엔씨애드컬쳐 주식회사',12,1);
+
+
+
+
+-- C: 책 6개
+insert into item values('C', null,'N','7년의 밤','18000');
+insert into book values('N01',13,1); 
+
+insert into item values('C', null,'N','세상이 잠든 동안','14000');
+insert into book values('N02',14,1); 
+
+insert into item values('C', null,'N','꽃 밟을 일을 근심하다','7200');
+insert into book values('P01',15,2); 
+
+insert into item values('C', null,'N','그늘진 말들에 꽃이 핀다','7200');
+insert into book values('P02',16,2); 
+
+insert into item values('C', null,'N','어떻게 나로 살 것인가','13500');
+insert into book values('D01',17,3); 
+
+insert into item values('C', null,'N','무례함의 비용','13500');
+insert into book values('D02',18,3); 
+
+
+
+

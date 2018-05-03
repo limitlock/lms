@@ -3,6 +3,7 @@ package com.cafe24.lms.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,11 +20,8 @@ public class DVDCategory {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long no;
 
+	@Column(name = "name", nullable = false)
 	private String name;
-
-	@OneToMany
-	@JoinColumn(name = "category_no")
-	private List<DVD> DVDs = new ArrayList<DVD>();
 
 	public Long getNo() {
 		return no;
@@ -41,17 +39,9 @@ public class DVDCategory {
 		this.name = name;
 	}
 
-	public List<DVD> getDVDs() {
-		return DVDs;
-	}
-
-	public void setDVDs(List<DVD> dVDs) {
-		DVDs = dVDs;
-	}
-
 	@Override
 	public String toString() {
-		return "DVDCategory [no=" + no + ", name=" + name + ", DVDs=" + DVDs + "]";
+		return "DVDCategory [no=" + no + ", name=" + name + "]";
 	}
 
 }

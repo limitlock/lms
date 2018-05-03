@@ -5,7 +5,7 @@
 			<div id="navigation">
 				<ul>
 					<li class="selected"><a href="${pageContext.request.contextPath }/admin">대여 관리</a></li>
-					<li><a href="${pageContext.request.contextPath }/admin">예약 관리</a></li>
+					<li><a href="${pageContext.request.contextPath }/admin/reserve">예약 관리</a></li>
 				</ul>
 			</div>
 			<div id="footer">&nbsp;</div>

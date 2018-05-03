@@ -2,10 +2,26 @@ package com.cafe24.lms.domain;
 
 import java.io.Serializable;
 
-public class RentId implements Serializable {
+public class RentAndReserveId implements Serializable {
 
 	private Long user;
 	private Long item;
+
+	public Long getUser() {
+		return user;
+	}
+
+	public void setUser(Long user) {
+		this.user = user;
+	}
+
+	public Long getItem() {
+		return item;
+	}
+
+	public void setItem(Long item) {
+		this.item = item;
+	}
 
 	@Override
 	public int hashCode() {
@@ -24,7 +40,7 @@ public class RentId implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RentId other = (RentId) obj;
+		RentAndReserveId other = (RentAndReserveId) obj;
 		if (item == null) {
 			if (other.item != null)
 				return false;

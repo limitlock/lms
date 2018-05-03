@@ -1,14 +1,19 @@
 package com.cafe24.lms.domain;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
-@IdClass(RentId.class)
-public class Rent {
+@Table
+@IdClass(RentAndReserveId.class)
+public class RentAndReserve {
 
 	@Id
 	@ManyToOne
@@ -20,8 +25,11 @@ public class Rent {
 	@JoinColumn(name = "item_id")
 	private Item item;
 
-	private String LeaseDate;
-	private String ReturnDate;
+	private String leaseDate;
+
+	private String returnDate;
+
+	private Long userIndex;
 
 	public User getUser() {
 		return user;
@@ -40,25 +48,33 @@ public class Rent {
 	}
 
 	public String getLeaseDate() {
-		return LeaseDate;
+		return leaseDate;
 	}
 
 	public void setLeaseDate(String leaseDate) {
-		LeaseDate = leaseDate;
+		this.leaseDate = leaseDate;
 	}
 
 	public String getReturnDate() {
-		return ReturnDate;
+		return returnDate;
 	}
 
 	public void setReturnDate(String returnDate) {
-		ReturnDate = returnDate;
+		this.returnDate = returnDate;
+	}
+
+	public Long getUserIndex() {
+		return userIndex;
+	}
+
+	public void setUserIndex(Long userIndex) {
+		this.userIndex = userIndex;
 	}
 
 	@Override
 	public String toString() {
-		return "Rent [user=" + user + ", item=" + item + ", LeaseDate=" + LeaseDate + ", ReturnDate=" + ReturnDate
-				+ "]";
+		return "RentAndReserve [user=" + user + ", item=" + item + ", leaseDate=" + leaseDate + ", returnDate="
+				+ returnDate + ", userIndex=" + userIndex + "]";
 	}
 
 }

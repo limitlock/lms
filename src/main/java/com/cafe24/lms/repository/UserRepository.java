@@ -9,6 +9,7 @@ import com.cafe24.lms.domain.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
+	
 	// public User getByEmail(String email);
 	User findByEmail(String email);
 

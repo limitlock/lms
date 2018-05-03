@@ -35,12 +35,11 @@ public class User {
 	@Column(name = "gender", nullable = false, columnDefinition = "enum('female','male')")
 	private Gender gender;
 
-	@Enumerated(EnumType.STRING)
-	@Column(name = "role", nullable = false, columnDefinition = "enum('ADMIN','USER')")
-	private Role role;
+	@Column(name = "role", nullable = false)
+	private String role;
 
 	@OneToMany(mappedBy = "user")
-	private List<Rent> rents = new ArrayList<Rent>();
+	private List<RentAndReserve> rents = new ArrayList<RentAndReserve>();
 
 	public Long getNo() {
 		return no;
@@ -82,12 +81,20 @@ public class User {
 		this.gender = gender;
 	}
 
-	public Role getRole() {
+	public String getRole() {
 		return role;
 	}
 
-	public void setRole(Role role) {
+	public void setRole(String role) {
 		this.role = role;
+	}
+
+	public List<RentAndReserve> getRents() {
+		return rents;
+	}
+
+	public void setRents(List<RentAndReserve> rents) {
+		this.rents = rents;
 	}
 
 	@Override

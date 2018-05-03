@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -14,76 +14,97 @@
 		<c:import url="/WEB-INF/views/include/header.jsp" />
 		<div id="content">
 			<div id="board">
-				<form id="search_form" action="${pageContext.request.contextPath }" method="get">
-					<input type="text" id="kwd" name="kwd" value="">
-					<input type="submit" value="찾기">
+				<form id="search_form" action="${pageContext.request.contextPath }"
+					method="get">
+					<input type="text" id="kwd" name="kwd" value=""> <input
+						type="submit" value="찾기">
 				</form>
 				<table class="tbl-ex">
 					<tr>
-						<th>번호</th>
+						<th>번호${authUser.role }</th>
 						<th>타이틀</th>
 						<th>카테고리</th>
 						<th>&nbsp;</th>
 					</tr>
-					<tr>
-						<td>5</td>
-						<td>세상의 중심에서 사랑을 외친 짐승</td>
-						<td>도서(소설)</td>
-						<td>
-							<a href="${pageContext.servletContext.contextPath }/rent" class="btn">대여</a>
-							<a href="${pageContext.servletContext.contextPath }/rent" class="btn">예약</a>
-						</td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td>AC/DC: Fly On The Wall</td>
-						<td>음반(락)</td>
-						<td>
-							<a href="${pageContext.servletContext.contextPath }/rent" class="btn">대여</a>
-							<a href="${pageContext.servletContext.contextPath }/rent" class="btn">예약</a>
-						</td>
-					</tr>						
-					<tr>
-						<td>3</td>
-						<td>Java의 정석 [3판]</td>
-						<td>도서(IT)</td>
-						<td>
-							<a href="${pageContext.servletContext.contextPath }/rent" class="btn">대여</a>
-							<a href="${pageContext.servletContext.contextPath }/rent" class="btn">예약</a>
-						</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>파리로 가는 길</td>
-						<td>DVD(영화-드라마)</td>
-						<td>
-							<a href="${pageContext.servletContext.contextPath }/rent" class="btn">대여</a>
-							<a href="${pageContext.servletContext.contextPath }/rent" class="btn">예약</a>
-						</td>
-					</tr>				
-					<tr>
-						<td>1</td>
-						<td>브루크너: 교향곡 7번</td>
-						<td>음반(클래식)</td>
-						<td>
-							<a href="${pageContext.servletContext.contextPath }/rent" class="btn">대여</a>
-							<a href="${pageContext.servletContext.contextPath }/rent" class="btn">예약</a>
-						</td>
-					</tr>				
+					<c:set var="count" value="${fn:length(list) }" />
+					<c:forEach items="${list }" step="1" var="vo" varStatus="status">
+						<tr>
+							<td>${maxNo -  ((p-1) * 5) - status.index }</td>
+								<c:choose>
+									<c:when test="${rentIdList[status.index].item.getId() == vo.id }">
+										<td>${vo.name }<font color="#ff0000">[대여중]</font><%-- <font color="#0037ff">[예약자: ${rentId.userIndex }명]</font> --%>
+										</td>
+										<td>${vo.category.name}</td>
+										<td>
+										<a href="${pageContext.servletContext.contextPath }/reserve?no=${vo.id}&userNo=${authUser.no}&p=${param.p}" class="btn">예약</a>
+										</td>
+									</c:when>
+									<c:otherwise>
+										<td>${vo.name }</td>
+										<td>${vo.category.name}</td>
+										<td><a href="${pageContext.servletContext.contextPath }/rent?no=${vo.id}&userNo=${authUser.no}&p=${param.p}" id="btn-rent" class="btn">대여</a></td>
+									</c:otherwise>
+								</c:choose>
+						</tr>
+					</c:forEach>
 				</table>
-				<div class="pager">
+				<div id="underpoint" class="pager">
 					<ul>
-						<li><a href="${pageContext.servletContext.contextPath }/rent">◀</a></li>
-						<li><a href="${pageContext.servletContext.contextPath }/rent">6</a></li>
-						<li><a href="${pageContext.servletContext.contextPath }/rent">7</a></li>
-						<li class="selected">8</li>
-						<li>9</li>
-						<li>10</li>
-						<li>▶</li>
+						<c:set var="count" value="${fn:length(list) }" />
+							<fmt:parseNumber var="totalPage" value="${(((maxNo-1)/5)+1)}"  integerOnly="true" />
+						<c:choose>
+							<c:when test="${param.p > 5 }">
+								<fmt:parseNumber var="startPage" value="${((param.p-1)/totalPage) * totalPage + 1}" integerOnly="true" />
+							</c:when>
+							<c:otherwise>
+								<fmt:parseNumber var="startPage" value="${((1-1)/totalPage) * totalPage + 1}" integerOnly="true" />
+							</c:otherwise>
+						</c:choose>
+						<c:choose>
+							<c:when test="${endPage > totalPage }">
+								<fmt:parseNumber var="endPage"
+									value="${((startPage + totalPage ) -1) } " integerOnly="true" />
+							</c:when>
+							<c:otherwise>
+								<fmt:parseNumber var="endPage" value="${totalPage}" integerOnly="true" />
+							</c:otherwise>
+						</c:choose>
+						
+						<c:choose>
+							<c:when test="${startPage <= param.p && param.p != 1}">
+								<li><a href="${pageContext.servletContext.contextPath }/main?p=${(param.p-1) }">◀</a></li>
+							</c:when>
+							<c:otherwise>
+								<li>◀</li>
+							</c:otherwise>
+						</c:choose>
+						
+						<c:forEach begin="${startPage }" end="${startPage+4}" step="1"
+							var="i" varStatus="status">
+							<c:choose>
+								<c:when test="${totalPage < i }">
+									<li>${i }</li>
+								</c:when>
+								<c:when test="${param.p == i }">
+									<li class="selected">${i }</li>
+								</c:when>
+								<c:otherwise>
+									<li><a href="${pageContext.servletContext.contextPath }/main?p=${i }">${i }</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+						
+						<c:choose>
+							<c:when test="${totalPage > param.p  }">
+								<li><a href="${pageContext.servletContext.contextPath }/main?p=${(param.p+1) }">▶</a></li>
+							</c:when>
+							<c:when test="${totalPage <= param.p }">
+								<li>▶</li>
+							</c:when>
+						</c:choose>
 					</ul>
-				</div>				
-				<div class="bottom">
 				</div>
+				<div class="bottom"></div>
 			</div>
 		</div>
 		<c:import url="/WEB-INF/views/include/footer.jsp" />

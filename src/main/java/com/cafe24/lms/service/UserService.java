@@ -16,7 +16,7 @@ public class UserService {
 	private UserRepository userRepository; // JPA 버전
 
 	public void join(User user) {
-		user.setRole(Role.USER);
+		user.setRole("USER");
 		userRepository.save(user);
 	}
 
@@ -37,7 +37,6 @@ public class UserService {
 
 		return userRepository.update(user) == 1;
 	}
-
 
 	/*
 	 * public void joinUser(User user) { userRepository.insert(user); }

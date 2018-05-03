@@ -56,11 +56,12 @@ public class AuthInterceptor extends HandlerInterceptorAdapter {
 		if (role == Auth.Role.USER) {
 			return true;
 		}
+		System.out.println(authUser.getRole() == "ADMIN");
 
 		// 8. ADMIN Role 접근
 		// ADMIN 권한이 없는 사용자이면 메인으로...
 		if (authUser.getRole().equals("ADMIN") == false) {
-			response.sendRedirect(request.getContextPath());
+			response.sendRedirect(request.getContextPath() + "/main");
 			return false;
 		}
 
